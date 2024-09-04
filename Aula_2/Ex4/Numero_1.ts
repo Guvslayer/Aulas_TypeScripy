@@ -2,7 +2,7 @@ import * as readlineSync from 'readline-sync';
 
 function encontrarMaiorElemento<T>(array: T[], comparador?: (a: T, b: T) => T): T {
     if (array.length === 0) {
-        throw new Error("O array nao pode estar vazio");
+        throw new Error("O array não pode estar vazio");
     }
     if (comparador) {
         return array.reduce(comparador);
@@ -14,7 +14,7 @@ function encontrarMaiorElemento<T>(array: T[], comparador?: (a: T, b: T) => T): 
 function criarArrayDeNumeros(tamanho: number): number[] {
     let array: number[] = [];
     for (let i = 0; i < tamanho; i++) {
-        const elemento = parseFloat(readlineSync.question(`Insira o numero ${i + 1}: `));
+        const elemento = parseFloat(readlineSync.question(`Insira o número ${i + 1}: `));
         array.push(elemento);
     }
     return array;
@@ -30,12 +30,12 @@ function criarArrayDePalavras(tamanho: number): string[] {
 }
 
 function main() {
-    const numArrays = parseInt(readlineSync.question("Quantos arrays voce deseja criar? "), 10);
+    const numArrays = parseInt(readlineSync.question("Quantos arrays você deseja criar? "), 10);
     let arraysCriados: any[] = [];
 
     for (let i = 0; i < numArrays; i++) {
-        const tipoArray = readlineSync.question(`O array numero ${i + 1} sera de qual tipo? (Escolha: "numero", "palavra"): `);
-        const tamanhoArray = parseInt(readlineSync.question(`Quantos elementos o array numero ${i + 1} deve ter? `), 10);
+        const tipoArray = readlineSync.question(`O array número ${i + 1} será de qual tipo? (Escolha: "numero", "palavra"): `);
+        const tamanhoArray = parseInt(readlineSync.question(`Quantos elementos o array número ${i + 1} deve ter? `), 10);
 
         let novoArray;
         let comparador;
@@ -44,7 +44,7 @@ function main() {
             novoArray = criarArrayDeNumeros(tamanhoArray);
         } else if (tipoArray === "palavra") {
             novoArray = criarArrayDePalavras(tamanhoArray);
-            comparador = (a: string, b: string) => (a.length > b.length ? a : b);
+            comparador = (a: string, b: string) => (a > b ? a : b); // Comparação pela ordem alfabética
         }
 
         arraysCriados.push({ array: novoArray, comparador });
@@ -52,7 +52,7 @@ function main() {
 
     arraysCriados.forEach((obj, index) => {
         const maiorElemento = encontrarMaiorElemento(obj.array, obj.comparador);
-        console.log(`O maior elemento do array numero ${index + 1} é:`, maiorElemento);
+        console.log(`O maior elemento do array número ${index + 1} é:`, maiorElemento);
     });
 }
 
